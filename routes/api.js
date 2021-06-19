@@ -17,13 +17,21 @@ router.get("/api",(req,res)=>{
     
 });
 
-router.post("/api/save",(req,res)=>{
-    const data={
-        username:"petrovic",
-        age:34
+router.post('/save', (req, res) => {
+    const data = req.body;
 
-    };
-    res.json(data)
+    const newBlogPost = new BlogPost(data);
+
+    newBlogPost.save((error) => {
+        if (error) {
+            res.status(500).json({ msg: 'Sorry, internal server errors' });
+            return;
+        }
+        // BlogPost
+        return res.json({
+            msg: 'Your data has been saved!!!!!!'
+        });
+    });
 });
 
 router.get("/api/ime",(req,res)=>{
