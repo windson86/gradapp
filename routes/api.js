@@ -17,7 +17,7 @@ router.get("/api",(req,res)=>{
     
 });
 
-router.post('/save', (req, res) => {
+router.post('/api/save', (req, res) => {
     const data = req.body;
 
     const newBlogPost = new BlogPost(data);
