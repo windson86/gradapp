@@ -19,7 +19,7 @@ router.get("/api",(req,res)=>{
 
 router.post('/api/save', (req, res) => {
     const data = req.body;
-
+        console.log("dolazni data",req.body)
     const newBlogPost = new BlogPost(data);
 
     newBlogPost.save((error) => {
