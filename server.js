@@ -18,6 +18,7 @@ mongoose.connection.on("connected", ()=>{
     console.log("mongoDB spojen")
 })
 
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 

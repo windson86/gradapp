@@ -2,11 +2,11 @@ const express = require('express')
 
 const router = express.Router();
 
-const BlogPost = require('../modeli/Blogpost');
+const Korisnici = require('../modeli/Korisnik');
 
 router.get("/api",(req,res)=>{
    
-    BlogPost.find({})
+    Korisnici.find({})
     .then((data)=>{
         console.log("podaci:",data);
         res.json(data)
@@ -16,20 +16,33 @@ router.get("/api",(req,res)=>{
     });
     
 });
+router.post('/api/deleteOne',(req,res)=>{
+console.log("dolazdelete:",req.body)
+Korisnici.deleteOne({"_id":req.body}, function(err) {
+    if (!err) {
+            console.log("deletano");
+    }
+    else {
+           console.log("error deletanja",err)
+    }
+})
+
+
+});
 
 router.post('/api/save', (req, res) => {
     const data = req.body;
         console.log("dolazni data",req.body)
-    const newBlogPost = new BlogPost(data);
+    const noviKorisnik = new Korisnici(data);
 
-    newBlogPost.save((error) => {
+    noviKorisnik.save((error) => {
         if (error) {
-            res.status(500).json({ msg: 'Sorry, internal server errors' });
+            res.status(500).json({ msg: 'jbga server error' });
             return;
         }
-        // BlogPost
+        
         return res.json({
-            msg: 'Your data has been saved!!!!!!'
+            msg: 'podaci spremljeni'
         });
     });
 });
