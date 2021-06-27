@@ -39,21 +39,8 @@ class App extends React.Component {
   
   deleteKorisnik = (dolaz)=>{
          
-        //const OBJ = {_id:dolaz}
+     
         this.props.obrisiKorisnika(dolaz);
-
-        /*axios({
-          url: '/api/deleteOne',
-          method: 'POST',
-          data: OBJ
-        })
-        .then(() => {
-          
-  
-        })
-        .catch(() => {
-          
-        });*/
         window.location.reload();
     };
       
@@ -74,9 +61,10 @@ class App extends React.Component {
 
   submit = (event) => {
     event.preventDefault(); 
-    this.props.dodajKorisnika(this.state.korisnik)
+    this.props.dodajKorisnika(this.state.korisnik);
+    window.location.reload();
     };
-
+    
   resetUserInputs = () => {
     
       this.setState({
@@ -101,7 +89,7 @@ class App extends React.Component {
              <td >{korisnik.prezime}</td>
              <td >{korisnik.ime}</td>
              <td >{korisnik.email}</td>
-             <td> <button  onClick={()=>this.props.obrisiKorisnika(korisnik._id)}>x</button></td>
+             <td> <button  onClick={()=>this.deleteKorisnik(korisnik._id)}>x</button></td>
            
       </tr>
     ));
