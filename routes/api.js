@@ -8,7 +8,7 @@ router.get("/api",(req,res)=>{
    
     Korisnici.find({})
     .then((data)=>{
-        console.log("podaci:",data);
+        
         res.json(data)
     })
     .catch((error)=>{
@@ -17,10 +17,10 @@ router.get("/api",(req,res)=>{
     
 });
 router.post('/api/deleteOne',(req,res)=>{
-console.log("dolazdelete:",req.body)
-Korisnici.deleteOne({"_id":req.body}, function(err) {
+    console.log("deletano",req.body._id);
+Korisnici.deleteOne({"_id":req.body._id}, function(err) {
     if (!err) {
-            console.log("deletano");
+            
     }
     else {
            console.log("error deletanja",err)
@@ -31,13 +31,13 @@ Korisnici.deleteOne({"_id":req.body}, function(err) {
 });
 
 router.post('/api/save', (req, res) => {
-    const data = req.body;
-        console.log("dolazni data",req.body)
+    const data = req.body.payload;
+    
     const noviKorisnik = new Korisnici(data);
 
     noviKorisnik.save((error) => {
         if (error) {
-            res.status(500).json({ msg: 'jbga server error' });
+            res.status(500).json({ msg: 'server error' });
             return;
         }
         
@@ -47,13 +47,6 @@ router.post('/api/save', (req, res) => {
     });
 });
 
-router.get("/api/ime",(req,res)=>{
-    const data={
-        username:"petrovic",
-        age:34
 
-    };
-    res.json(data)
-});
 
 module.exports = router;
