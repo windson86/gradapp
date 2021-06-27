@@ -1,11 +1,6 @@
-
-
 import React from 'react';
-//import axios from 'axios';
 import { connect } from "react-redux";
 import { getData,addKorisnika,deleteKorisnikaID} from "./actions/index";
-
-
 import './App.css';
 
 class App extends React.Component {
@@ -19,34 +14,28 @@ class App extends React.Component {
             email: '',
             
         },
-      korisnici:[]
+      korisnici:[],
+      isLoading: true 
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
 }
  
-
-
-
-  componentDidMount = () => {
+componentDidMount = () => {
     this.props.getUsers();
- 
+    this.setState({isLoading:false})
     
   };
 
-
-  
-  deleteKorisnik = (dolaz)=>{
+deleteKorisnik = (dolaz)=>{
          
      
         this.props.obrisiKorisnika(dolaz);
         window.location.reload();
     };
       
-  
-
-    handleChange(event) {
+handleChange(event) {
       const { name, value } = event.target;
       const { korisnik } = this.state;
       this.setState({
@@ -55,17 +44,14 @@ class App extends React.Component {
               [name]: value
           }
       });
-      
-  }
-
-
-  submit = (event) => {
+}
+ submit = (event) => {
     event.preventDefault(); 
     this.props.dodajKorisnika(this.state.korisnik);
     window.location.reload();
     };
     
-  resetUserInputs = () => {
+resetUserInputs = () => {
     
       this.setState({
         korisnik: {
@@ -77,7 +63,7 @@ class App extends React.Component {
     });
   };
 
-  prikaziKorisnike = (korisnici) => {
+prikaziKorisnike = (korisnici) => {
 
     if (!korisnici.length) return null;
 
@@ -95,7 +81,7 @@ class App extends React.Component {
     ));
   };
 
-  render() {
+render() {
     
     console.log(this.state.korisnik)
 
